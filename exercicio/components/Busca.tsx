@@ -1,59 +1,100 @@
-import { View, TextInput, FlatList, Text, StyleSheet } from 'react-native'
-import { useEffect, useState } from 'react'
+import {
+  View,
+  TextInput,
+  FlatList,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+  Image,
+} from "react-native";
+import { useEffect, useState } from "react";
 
-// 1. Definição da interface para o tipo de dado que a API retorna
-interface Usuario {
-  id: number
-  name: string
-  email: string
+interface Personagem {
+  name: string;
+  species: string;
+  image: string;
+}
+
+interface RespostaAPI {
+  results: Personagem[];
 }
 
 const BuscaUsuarios = () => {
-  // 2. Definindo o estado com o tipo genérico Array de Usuario <Usuario[]>
-  const [usuarios, setUsuarios] = useState<Usuario[]>([])
-  const [termo, setTermo] = useState<string>('')
+  const [personagens, setPersonagens] = useState<Personagem[]>([]);
+  const [termo, setTermo] = useState<string>("");
+  const [carregando, setCarregando] = useState<boolean>(true);
 
   useEffect(() => {
-    fetch('https://typicode.com')
+    fetch("https://rickandmortyapi.com/api/character")
       .then((resposta) => resposta.json())
-      .then((dados: Usuario[]) => setUsuarios(dados))
-      .catch((erro) => console.log(erro))
-  }, [])
+      .then((dados: RespostaAPI) => {
+        setPersonagens(dados.results);
+        setCarregando(false);
+      })
 
-  const usuariosFiltrados = usuarios.filter((usuario) =>
-    usuario.name.toLowerCase().includes(termo.toLowerCase())
-  )
+      .catch((erro) => console.log(erro));
+  }, [termo]);
+
+  const personagensFiltrados = personagens.filter((personagem) =>
+    personagem.name.toLocaleLowerCase().includes(termo.toLowerCase())
+  );
+
+  if (carregando) {
+    return <ActivityIndicator size="large" />;
+  }
 
   return (
     <View style={styles.container}>
       <TextInput
         value={termo}
         onChangeText={setTermo}
-        placeholder="Busque um usuário por nome..."
+        placeholder="Busque um personagem..."
         style={styles.input}
       />
 
       <FlatList
-        data={usuariosFiltrados}
-        keyExtractor={(item) => item.id.toString()}
-        // 3. O TypeScript infere automaticamente que 'item' é do tipo Usuario
+        data={personagensFiltrados}
         renderItem={({ item }) => (
           <View style={styles.item}>
             <Text style={styles.nome}>{item.name}</Text>
-            <Text style={styles.email}>{item.email}</Text>
+            <Text style={styles.status}>{item.species}</Text>
+            <Image style={styles.imagem} source={{ uri: item.image }}></Image>
           </View>
         )}
       />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 40, backgroundColor: '#fff' },
-  input: { borderWidth: 1, borderColor: '#ccc', padding: 10, borderRadius: 8, marginBottom: 20 },
-  item: { padding: 15, borderBottomWidth: 1, borderBottomColor: '#eee' },
-  nome: { fontSize: 16, fontWeight: 'bold' },
-  email: { fontSize: 14, color: '#666' }
-})
+  container: { flex: 1, padding: 40, backgroundColor: "#fff" },
+  input: {
+    borderWidth: 1,
+    borderColor: "gray",
+    padding: 10,
+    borderRadius: 8,
+  },
+  item: {
+    padding: 15,
+    margin: 4,
+    width: 230,
+    height: 110,
+    backgroundColor: "#ccc",
+    borderRadius: 8,
+  },
+  nome: { fontSize: 17, fontWeight: "bold", width: 130, marginBottom: 4 },
+  status: { width: 80, fontSize: 14, color: 'black' },
+  imagem: {
+    height: 55,
+    width: 55,
+    objectFit: "cover",
+    borderRadius: 5,
+    position: "absolute",
+    alignSelf: "flex-end",
+    justifyContent: "flex-start",
+    borderWidth: 2,
+    borderColor: '#888'
+  },
+});
 
-export default BuscaUsuarios
+export default BuscaUsuarios;

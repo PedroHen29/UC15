@@ -13,6 +13,7 @@ interface Produto {
   title: string;
 }
 
+
 const ListaProdutos = () => {
   // array de produtos
   const [produtos, setProdutos] = useState<Produto[]>([]);
@@ -25,7 +26,7 @@ const ListaProdutos = () => {
       .then((resposta) => resposta.json())
       .then((dados) => {
         setProdutos(dados);
-        setCarregando(false);
+        setCarregando(false); 
       });
   }, [termo]);
 

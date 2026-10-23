@@ -67,7 +67,7 @@ const BuscaUsuarios = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 40, backgroundColor: "#fff" },
+  container: { flex: 1, padding: 40, backgroundColor: "#eee" },
   input: {
     borderWidth: 1,
     borderColor: "gray",
@@ -76,11 +76,12 @@ const styles = StyleSheet.create({
   },
   item: {
     padding: 15,
-    margin: 4,
+    margin: 10,
     width: 230,
     height: 110,
-    backgroundColor: "#ccc",
+    backgroundColor: "#ddd",
     borderRadius: 8,
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 1)'
   },
   nome: { fontSize: 17, fontWeight: "bold", width: 130, marginBottom: 4 },
   status: { width: 80, fontSize: 14, color: 'black' },
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignSelf: "flex-end",
     justifyContent: "flex-start",
-    borderWidth: 2,
+    borderWidth: 1.5,
     borderColor: '#888'
   },
 });

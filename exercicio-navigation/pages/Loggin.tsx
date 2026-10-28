@@ -1,36 +1,71 @@
-import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import {
+  Button,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import React from "react";
+import { Undo2 } from "lucide-react";
 
-const Loggin = ({navigation}: any) => {
+const Loggin = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
-    
-    <Text style={styles.texto}>Loggin</Text>
+      <Text style={styles.texto}>Loggin</Text>
 
-    <TextInput  style={styles.input} placeholder='Nome...'/>
-    <TextInput style={styles.input} placeholder='Email...'/>
+      <TextInput style={styles.input} placeholder="Nome..." />
+      <TextInput style={styles.input} placeholder="Email..." />
 
-    <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Profile')}>Loggin</TouchableOpacity>
+      <TouchableOpacity
+        style={styles.botaoEntar}
+        onPress={() => navigation.navigate("Profile")}
+      >
+        Entrar
+      </TouchableOpacity>
 
-    
-  </View>
-  )
-}
+      <TouchableOpacity style={styles.botaoCriar} onPress={() => navigation.navigate("Register")}>
+        Criar uma conta
+      </TouchableOpacity>
+    </View>
+  );
+};
 
-export default Loggin
+export default Loggin;
 
 const styles = StyleSheet.create({
-  container: {flex: 1, justifyContent: 'center', alignItems: 'center', gap: 5 },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 5,
+  },
 
-  input: {borderColor: 'black', borderWidth: 1.5, borderRadius: 4},
-  texto: {fontFamily: 'Arial', fontSize: 20, fontWeight: 'bold'},
-  botao: {
+  input: {
+    borderColor: "black",
+    borderWidth: 1.5,
+    borderRadius: 8,
+    width: 200,
+    fontWeight: "500",
+    height: 30
+  },
+  texto: { fontFamily: "Arial", fontSize: 20, fontWeight: "bold" },
+  botaoEntar: {
     padding: 8,
-    width: 165,
+    width: 200,
     backgroundColor: "#1e40af",
     borderRadius: 8,
     color: "white",
-    fontFamily: 'Arial',
-    textAlign: 'center',
+    fontFamily: "Arial",
+    textAlign: "center",
   },
-})
+  botaoCriar: {
+    padding: 8,
+    width: 200,
+    backgroundColor: "#1E9F55",
+    borderRadius: 8,
+    color: "white",
+    fontFamily: "Arial",
+    textAlign: "center",
+  }
+});

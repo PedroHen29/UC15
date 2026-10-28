@@ -8,10 +8,18 @@ import {
   View,
 } from "react-native";
 import React from "react";
+import { Scale, Undo2 } from "lucide-react";
 
-const Loggin = ({ navigation }: any) => {
+const Profille = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        style={styles.botao}
+      >
+        <Undo2 size={25} color="black" />
+      </TouchableOpacity>
+
       <Text style={styles.textoPerfil}>Perfil</Text>
       <View style={styles.card}>
         <Image
@@ -23,18 +31,12 @@ const Loggin = ({ navigation }: any) => {
         <Text style={styles.texto}>Nome: Lionel Messi</Text>
         <Text style={styles.texto}>Idade: 39</Text>
         <Text style={styles.texto}>Descrição: Melhor jogador do mundo</Text>
-        <TouchableOpacity
-          style={styles.botao}
-          onPress={() => navigation.navigate("Register")}
-        >
-          Register
-        </TouchableOpacity>
       </View>
     </View>
   );
 };
 
-export default Loggin;
+export default Profille;
 
 const styles = StyleSheet.create({
   container: {
@@ -54,9 +56,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     margin: 10,
     gap: 3,
+    boxShadow: "0px 4px 6px rgba(0, 0, 0, 1)",
   },
 
-  input: { borderColor: "black", borderWidth: 1.5, borderRadius: 4 },
   textoPerfil: {
     fontFamily: "Arial",
     fontSize: 20,
@@ -71,14 +73,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   imagem: { height: 80, width: 80, borderRadius: 50, marginBottom: 15 },
-  botao: {
-    padding: 8,
-    width: "100%",
-    backgroundColor: "gray",
-    borderRadius: 8,
-    color: "white",
-    fontFamily: 'Arial',
-    textAlign: 'center',
-    marginTop: 'auto'
-  },
+
+  botao: { marginRight: 'auto', marginLeft: 10,  marginTop: 5},
 });

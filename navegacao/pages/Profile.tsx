@@ -1,14 +1,30 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { View, Text, Button, StyleSheet } from 'react-native';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { RootStackParamList } from '../types/navigation';
 
-const Profile = () => {
+type Props = NativeStackScreenProps<RootStackParamList, 'Profile'>;
+
+export default function Profile({ navigation, route }: Props) {
+  const { userId, nome } = route.params;
+
   return (
-    <View>
-      <Text>Profile</Text>
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Perfil de {nome}</Text>
+      <Text>ID do usuário: {userId}</Text>
+
+      <Button title="Voltar" onPress={() => navigation.goBack()} />
     </View>
-  )
+  );
 }
 
-export default Profile
-
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 20,
+    padding: 20,
+    backgroundColor: '#FFFFFF',
+  },
+  titulo: { fontSize: 26, fontWeight: 'bold' },
+});

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList, Image } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { InicioStackParamList } from "../types/navigation";
 import { Pokemon, pokemons } from "../data/Pokemons";
@@ -23,7 +23,7 @@ export default function FavoritosScreen() {
 
       {listaFavoritos.length === 0 ? (
         <Text style={styles.subtitulo}>
-          Você ainda não favoritou nenhum Pokémon.
+          Seus pokémons favoriros vão aparecer aqui.
         </Text>
       ) : (
         <FlatList
@@ -33,6 +33,7 @@ export default function FavoritosScreen() {
           renderItem={({ item }) => (
             <View style={styles.card}>
               <Text style={styles.nome}>{item.nome}</Text>
+              <Image style={styles.imagem} source={{uri: item.imagem}}></Image>
             </View>
           )}
         />
@@ -54,5 +55,6 @@ const styles = StyleSheet.create({
     borderColor: "#E1E5EA",
     gap: 8,
   },
-  nome: { fontSize: 18, fontWeight: "bold" },
+  nome: { fontSize: 18, fontWeight: "bold", },
+  imagem: {objectFit: 'cover', borderRadius: '100%', width: 50, height: 50, alignSelf: 'flex-end',}
 });

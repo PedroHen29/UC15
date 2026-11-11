@@ -25,6 +25,7 @@ export default function DetalhesScreen({ navigation, route }: Props) {
       <Image style={styles.imagem} source={{uri: pokemon.imagem}}></Image>
       <Text style={styles.texto}>Região: {pokemon.regiao}</Text>
       <Text style={styles.texto}>Tipo: {pokemon.tipo}</Text>
+      <Text style={styles.texto}>Descrição: {pokemon.descricao}</Text>
       <TouchableOpacity style={styles.botao} onPress={() => navigation.goBack()}>Voltar</TouchableOpacity>
     </View>
   );
